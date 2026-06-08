@@ -83,7 +83,8 @@ int main(void){
             DrawRectangle(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT, GetColor(0x08080888));
             DrawText("PAUSED", (DISPLAY_WIDTH - MeasureText("PAUSED", PAUSED_BANNER_SIZE)) / 2, (DISPLAY_HEIGHT - PAUSED_BANNER_SIZE) / 2, PAUSED_BANNER_SIZE, GetColor(0xFFFFFFFF));
         }
-        
+
+        DrawFPS(DISPLAY_WIDTH - 80, DISPLAY_HEIGHT - 20);
         EndDrawing();                
     }
     CloseWindow();
