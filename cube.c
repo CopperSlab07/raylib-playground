@@ -12,7 +12,9 @@ Vector3 cube_pos[MAX_CUBES] = {0};
 int cube_count = 1;
 void cube_append(void){
     if(cube_count < MAX_CUBES){
-        cube_pos[cube_count++] = (Vector3){.x = cube_pos[cube_count].x + 1, .y = cube_pos[cube_count].y, .z = cube_pos[cube_count].z};
+        int index = cube_count;
+        cube_count++;
+        cube_pos[cube_count] = (Vector3){.x = cube_pos[index].x + 1, .y = cube_pos[index].y, .z = cube_pos[index].z};
     }
     else {
         TraceLog(LOG_INFO, "You fat fuck, there's no more space!");

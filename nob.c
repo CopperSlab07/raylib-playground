@@ -16,9 +16,9 @@ void build_common_linux(Nob_Cmd *cmd, const char *exec, const char *source){
 int main(int argc, char **argv){
     NOB_GO_REBUILD_URSELF(argc, argv);
     Nob_Cmd cmd = {0};
-    build_common_linux(&cmd, "grid", "grid.c");
+    build_common_windows(&cmd, "grid", "grid.c");
     if(!nob_cmd_run(&cmd)) return -1;
-    build_common_linux(&cmd, "cube", "cube.c");
+    build_common_windows(&cmd, "cube", "cube.c");
     if(!nob_cmd_run(&cmd)) return -1;
     return 0;
 }
