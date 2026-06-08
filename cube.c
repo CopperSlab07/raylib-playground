@@ -57,9 +57,9 @@ int main(void){
     while(!WindowShouldClose()){
         //State handling
         if(IsKeyPressed(KEY_ESCAPE)){
-            screenshot = LoadImageFromScreen();
-            paused_background = LoadTextureFromImage(screenshot);
             if(state != STATE_PAUSED){
+                screenshot = LoadImageFromScreen();
+                paused_background = LoadTextureFromImage(screenshot);
                 prev_state = state;
                 state = STATE_PAUSED;
             } else {
