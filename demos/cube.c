@@ -1,8 +1,8 @@
 #include <stdint.h>
 #include <raylib.h>
 
-#define DISPLAY_WIDTH  800
-#define DISPLAY_HEIGHT 600
+#define DISPLAY_WIDTH  1290
+#define DISPLAY_HEIGHT 720
 #define PAUSED_BANNER_SIZE 20
 #define CUBE_SIZE 1
 #define MAX_CUBES 16
@@ -21,10 +21,10 @@ typedef struct Platforms {
 } Platforms;
 
 Platform base = {
-    .origin = (Vector3){-50, -50, 0},
-    .size = (Vector3){100, 100, -1},
+    .origin = (Vector3){0, 0, -1},
+    .size = (Vector3){10, 10, 1},
 };
-
+/*
 Vector3 cube_pos[MAX_CUBES] = {0};
 int cube_count = 0;
 
@@ -52,7 +52,7 @@ void cube_pop(void){
         TraceLog(LOG_INFO, "You scumbag, there's no other cubes!");
     }
 }
-
+*/
 typedef enum States {
     STATE_DEFAULT = 0,
     STATE_PAUSED = 1
@@ -69,7 +69,8 @@ int main(void){
         .target = (Vector3){.x = 0, .y = 0, .z = 0},
         .up = (Vector3){.x = 0, .y = 0, .z = 1},
         .fovy = 90,
-        .projection = CAMERA_PERSPECTIVE //CAMERA_ORTHOGRAPHIC
+        .projection = CAMERA_PERSPECTIVE,
+        //.projection = CAMERA_ORTHOGRAPHIC,
     };
     
     InitWindow(DISPLAY_WIDTH, DISPLAY_HEIGHT, "cube");
@@ -94,16 +95,24 @@ int main(void){
         //Input handling (after state handling)
         switch(state){
             case STATE_DEFAULT: {
+/*
                 if(IsKeyPressed(KEY_R)){
-                    //spawn = 1;
                     cube_append();
                 }
             
                 if(IsKeyPressed(KEY_E)){
                     cube_pop();
                 }
-        
-                UpdateCamera(&cam, CAMERA_FIRST_PERSON);
+*/
+                if(IsKeyPressed(KEY_O)){
+                    cam.fovy = 120;
+                }
+
+                if(IsKeyPressed(KEY_P)){
+                    cam.fovy = 90;
+                }
+
+                UpdateCamera(&cam, CAMERA_THIRD_PERSON);
             }
             break;
         }
@@ -117,10 +126,14 @@ int main(void){
                 BeginMode3D(cam);
                 DrawCube(base.origin, base.size.x, base.size.y, base.size.z, base.color);
                 DrawCubeWires(base.origin, base.size.x, base.size.y, base.size.z, RAYWHITE);
+                /*
                 for(int i = 0; i < cube_count; i++){
                     DrawCube(cube_pos[i], CUBE_SIZE, CUBE_SIZE, CUBE_SIZE, CUBE_COLOR_DEFAULT);
                     DrawCubeWires(cube_pos[i], CUBE_SIZE, CUBE_SIZE, CUBE_SIZE, CUBE_COLOR_OUTLINE_DEFAULT);
                 }
+                */
+                DrawCube(cam.target, CUBE_SIZE, CUBE_SIZE, CUBE_SIZE, RED);
+                DrawCubeWires(cam.target, CUBE_SIZE, CUBE_SIZE, CUBE_SIZE, RAYWHITE);
                 EndMode3D();
             }
             break;

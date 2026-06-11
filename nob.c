@@ -1,5 +1,5 @@
 #define NOB_IMPLEMENTATION
-#include "vendor/nob.h"
+#include "./vendor/nob.h"
 
 void build_common_windows(Nob_Cmd *cmd, const char *exec, const char *source){
     nob_cmd_append(cmd, "gcc", "-std=c11", "-Wall", "-Wextra", "-I./vendor", "-I./vendor/raylib-6.0_win64_mingw-w64/include");
@@ -26,17 +26,17 @@ int main(int argc, char **argv){
     }
     Nob_Cmd cmd = {0};
     if(argc == 1 || strcmp(argv[1], "demo") == 0){
-        build_common_windows(&cmd, "grid", "grid.c");
+        build_common_windows(&cmd, "./demos/grid", "./demos/grid.c");
         if(!nob_cmd_run(&cmd)) return -1;
 
-        build_common_windows(&cmd, "cube", "cube.c");
+        build_common_windows(&cmd, "./demos/cube", "./demos/cube.c");
         if(!nob_cmd_run(&cmd)) return -1;
     }
     if(argc == 1 || strcmp(argv[1], "example") == 0){
-        build_example(&cmd, "examples/nuklear_raylib_example", "examples/nuklear_raylib_example.c");
+        build_example(&cmd, "./examples/nuklear_raylib_example", "./examples/nuklear_raylib_example.c");
         if(!nob_cmd_run(&cmd)) return -1;
 
-        build_example(&cmd, "examples/nuklear_example_2", "examples/nuklear_example_2.c");
+        build_example(&cmd, "./examples/nuklear_example_2", "./examples/nuklear_example_2.c");
         if(!nob_cmd_run(&cmd)) return -1;
     }
     return 0;
